@@ -2,23 +2,21 @@
 
 import { useRouter } from 'next/router'
 import React, { FunctionComponent as FC } from 'react'
-import Select from 'react-select'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useGameContext } from '../../context/game-context'
+import { Options } from '../../types'
+import {
+	AMOUNT_OPTIONS,
+	DEFAULT_OPTIONS,
+	DIFFICULTY_OPTIONS,
+} from './game-options.constants'
+import { Select } from './select'
+
 export const GameOptions: FC = () => {
 	const router = useRouter()
 	const { setAmount, setDifficulty } = useGameContext()
 	const { control, handleSubmit } = useForm<Options>({
-		defaultValues: {
-			difficulty: {
-				value: 'medium',
-				label: 'Medium',
-			},
-			amount: {
-				value: 10,
-				label: '10',
-			},
-		},
+		defaultValues: DEFAULT_OPTIONS,
 	})
 
 	const onSubmit = (data: Options) => {
@@ -28,61 +26,19 @@ export const GameOptions: FC = () => {
 	}
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<label>
-				Number of questions:
-				<Controller
-					name="amount"
-					control={control}
-					render={({ field }) => (
-						<Select
-							{...field}
-							defaultValue={{ value: 10, label: '10' } as any}
-							options={
-								[
-									{ value: 5, label: '5' },
-									{ value: 10, label: '10' },
-									{ value: 15, label: '15' },
-									{ value: 20, label: '20' },
-								] as any
-							}
-						/>
-					)}
-				/>
-			</label>
-			<label>
-				Difficulty:
-				<Controller
-					name="difficulty"
-					control={control}
-					render={({ field }) => (
-						<Select
-							{...field}
-							defaultValue={{ value: 'medium', label: 'Medium' } as any}
-							options={
-								[
-									{ value: 'easy', label: 'Easy' },
-									{ value: 'medium', label: 'Medium' },
-									{ value: 'hard', label: 'Hard' },
-								] as any
-							}
-						/>
-					)}
-				/>
-			</label>
+			<Select
+				label="Number of questions"
+				control={control}
+				name="amount"
+				options={AMOUNT_OPTIONS}
+			/>
+			<Select
+				label="Difficulty"
+				control={control}
+				name="difficulty"
+				options={DIFFICULTY_OPTIONS}
+			/>
 			<button type="submit">Start game</button>
 		</form>
 	)
-}
-
-type Options = {
-	amount: {
-		value: number
-		label: string
-	}
-	difficulty: {
-		value: string
-		label: string
-	}
-	// category: string
-	// type?: 'multiple' | 'boolean'
 }

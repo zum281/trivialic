@@ -8,3 +8,16 @@ export type Question = {
 	question: string
 	type: string
 }
+
+export type Options = {
+	amount: {
+		value: number
+		label: string
+	}
+	difficulty: {
+		value: string
+		label: string
+	}
+	// category: string
+	// type?: 'multiple' | 'boolean'
+}
