@@ -1,16 +1,9 @@
 /** @format */
 import { useQuery } from '@tanstack/react-query'
-
-type Question = {
-	category: string
-	correct_answer: string
-	difficulty: string
-	incorrect_answers: string[]
-	question: string
-	type: string
-}
+import { Question } from '../types'
 
 const API_URL = 'https://opentdb.com'
+
 const fetchQuestions = async (amount: number): Promise<Question[]> => {
 	try {
 		const res = await fetch(`${API_URL}/api.php?amount=${amount}`)
@@ -18,7 +11,7 @@ const fetchQuestions = async (amount: number): Promise<Question[]> => {
 			const data = await res.json()
 			return data.results
 		} else {
-			throw new Error('Something went wrong')
+			throw new Error(`${res.status} ${res.statusText}`)
 		}
 	} catch (e: any) {
 		throw new Error(e.message)
