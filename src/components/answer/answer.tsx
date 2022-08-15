@@ -22,8 +22,10 @@ export const Answer: FC<Props> = ({
 	...rest
 }) => {
 	return (
-		<button onClick={() => handleAnswerClick(answer)} {...rest}>
-			{answer}
-		</button>
+		<button
+			onClick={() => handleAnswerClick(answer)}
+			{...rest}
+			dangerouslySetInnerHTML={{ __html: answer }}
+		/>
 	)
 }
