@@ -3,6 +3,7 @@
 import React, { FunctionComponent as FC } from 'react'
 import Head from 'next/head'
 import styled from '@emotion/styled'
+import { GlobalStyle } from '../../style/global'
 
 type Props = {
 	children: React.ReactNode
@@ -10,6 +11,7 @@ type Props = {
 export const Layout: FC<Props> = ({ children }) => {
 	return (
 		<>
+			<GlobalStyle />
 			<Head>
 				<title>Trivialic</title>
 				<meta name="description" content="Trivia quiz app" />

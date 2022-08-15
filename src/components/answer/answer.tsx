@@ -1,6 +1,5 @@
 /** @format */
 
-import styled from '@emotion/styled'
 import React, {
 	ButtonHTMLAttributes,
 	DetailedHTMLProps,
