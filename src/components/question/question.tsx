@@ -2,6 +2,7 @@
 
 import React, { FunctionComponent as FC, useMemo, useState } from 'react'
 import { Question as QuestionType } from '../../types'
+import { Answer } from '../answer'
 
 type Props = {
 	question: QuestionType
@@ -22,25 +23,34 @@ export const Question: FC<Props> = ({
 		[question]
 	)
 
+	const coloredAnswers = useMemo(() => {
+		return answers.map((answer) => {
+			const color = answer === correct_answer ? 'green' : 'red'
+			return {
+				answer,
+				color: !canUserAnswer ? color : 'black',
+			}
+		})
+	}, [answers, canUserAnswer])
+
 	const handleAnswerClick = (answer: string) => {
 		if (answer === correct_answer) updateScore()
-		// disable answering after first click
 		setCanUserAnswer(false)
 		updateAnsweredQuestions()
 	}
 
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column' }}>
-			{questionText}
+			<p dangerouslySetInnerHTML={{ __html: questionText }} />
 			<div style={{ display: 'flex', gap: '1em' }}>
-				{answers.map((answer, idx) => (
-					<button
+				{coloredAnswers.map((answer, idx) => (
+					<Answer
 						key={idx}
-						onClick={() => handleAnswerClick(answer)}
+						answer={answer.answer}
 						disabled={!canUserAnswer}
-					>
-						{answer}
-					</button>
+						handleAnswerClick={handleAnswerClick}
+						style={{ color: answer.color }}
+					/>
 				))}
 			</div>
 		</div>
