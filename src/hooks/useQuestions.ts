@@ -1,10 +1,14 @@
 /** @format */
 import { useQuery } from '@tanstack/react-query'
+import { useGameContext } from '../context/game-context'
 import { Question } from '../types'
 
 const API_URL = 'https://opentdb.com'
 
-const fetchQuestions = async (amount: number): Promise<Question[]> => {
+const fetchQuestions = async (
+	amount: number,
+	difficulty: string
+): Promise<Question[]> => {
 	try {
 		const res = await fetch(`${API_URL}/api.php?amount=${amount}`)
 		if (res.ok) {
@@ -18,5 +22,7 @@ const fetchQuestions = async (amount: number): Promise<Question[]> => {
 	}
 }
 
-export const useQuestions = (amount: number) =>
-	useQuery(['questions'], () => fetchQuestions(amount))
+export const useQuestions = () => {
+	const { amount, difficulty } = useGameContext()
+	return useQuery(['questions'], () => fetchQuestions(amount, difficulty))
+}

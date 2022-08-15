@@ -5,11 +5,12 @@ import { useEffect, useState } from 'react'
 import { Question } from '../components/question'
 import { useQuestions } from '../hooks/useQuestions'
 import { useQueryClient } from '@tanstack/react-query'
+import { useGameContext } from '../context/game-context'
 
-const NUMBER_OF_QUESTIONS = 10
 const Game: NextPage = () => {
 	const queryClient = useQueryClient()
-	const { data, isLoading } = useQuestions(10)
+	const { amount } = useGameContext()
+	const { data, isLoading } = useQuestions()
 	const [score, setScore] = useState(0)
 	const [answeredQuestions, setAnsweredQuestions] = useState<number>(0)
 
@@ -31,7 +32,7 @@ const Game: NextPage = () => {
 
 	return (
 		<>
-			{answeredQuestions !== NUMBER_OF_QUESTIONS &&
+			{answeredQuestions !== amount &&
 				data!.map((question, idx) => (
 					<Question
 						key={idx}
@@ -40,12 +41,12 @@ const Game: NextPage = () => {
 						updateAnsweredQuestions={updateAnsweredQuestions}
 					/>
 				))}
-			{answeredQuestions === NUMBER_OF_QUESTIONS && (
+			{answeredQuestions === amount && (
 				<div>
 					<h1>
-						You scored {score} out of {NUMBER_OF_QUESTIONS}
+						You scored {score} out of {amount}
 					</h1>
-					<button onClick={restart}>Restart</button>
+					<button onClick={restart}>Play again</button>
 				</div>
 			)}
 		</>
