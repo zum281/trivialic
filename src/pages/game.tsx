@@ -6,6 +6,7 @@ import { Question } from '../components/question'
 import { useQuestions } from '../hooks/useQuestions'
 import { useQueryClient } from '@tanstack/react-query'
 import { useGameContext } from '../context/game-context'
+import { Button } from '../style/shared'
 
 const Game: NextPage = () => {
 	const queryClient = useQueryClient()
@@ -46,7 +47,9 @@ const Game: NextPage = () => {
 					<h1>
 						You scored {score} out of {amount}
 					</h1>
-					<button onClick={restart}>Play again</button>
+					<Button color="black" onClick={restart}>
+						Play again
+					</Button>
 				</div>
 			)}
 		</>

@@ -5,10 +5,13 @@ import React, {
 	DetailedHTMLProps,
 	FunctionComponent as FC,
 } from 'react'
+import { Button } from '../../style/shared'
+import { Color } from '../../types'
 
 type Props = {
 	answer: string
 	handleAnswerClick: (answer: string) => void
+	color: Color
 } & DetailedHTMLProps<
 	ButtonHTMLAttributes<HTMLButtonElement>,
 	HTMLButtonElement & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'>
@@ -17,14 +20,15 @@ type Props = {
 export const Answer: FC<Props> = ({
 	answer,
 	handleAnswerClick,
-
+	color,
 	...rest
 }) => {
 	return (
-		<button
+		<Button
 			onClick={() => handleAnswerClick(answer)}
-			{...rest}
+			color={color}
 			dangerouslySetInnerHTML={{ __html: answer }}
+			{...rest}
 		/>
 	)
 }

@@ -1,4 +1,6 @@
-import { Global, css } from "@emotion/react";
+/** @format */
+
+import { Global, css } from '@emotion/react'
 
 export const GlobalStyle = () => (
 	<Global
@@ -7,6 +9,8 @@ export const GlobalStyle = () => (
 				--clr-primary: #ffa00f;
 				--clr-black: #333;
 				--clr-white: #fff;
+				--clr-red: #f25757;
+				--clr-green: #06d6a0;
 			}
 			*,
 			*::before,
@@ -16,7 +20,7 @@ export const GlobalStyle = () => (
 				padding: 0;
 			}
 			body {
-				font-family: "Roboto", sans-serif;
+				font-family: 'Roboto', sans-serif;
 				font-size: 1rem;
 				font-weight: 400;
 				line-height: 1.6;
@@ -25,4 +29,4 @@ export const GlobalStyle = () => (
 			}
 		`}
 	/>
-);
+)

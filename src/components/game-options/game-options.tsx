@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React, { FunctionComponent as FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { useGameContext } from '../../context/game-context'
+import { Button } from '../../style/shared'
 import { Options } from '../../types'
 import {
 	AMOUNT_OPTIONS,
@@ -38,7 +39,9 @@ export const GameOptions: FC = () => {
 				name="difficulty"
 				options={DIFFICULTY_OPTIONS}
 			/>
-			<button type="submit">Start game</button>
+			<Button color="black" type="submit">
+				Start game
+			</Button>
 		</form>
 	)
 }

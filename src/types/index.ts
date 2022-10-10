@@ -21,3 +21,5 @@ export type Options = {
 	// category: string
 	// type?: 'multiple' | 'boolean'
 }
+
+export type Color = 'green' | 'red' | 'black'

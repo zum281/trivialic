@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { FunctionComponent as FC, useMemo, useState } from 'react'
-import { Question as QuestionType } from '../../types'
+import { Color, Question as QuestionType } from '../../types'
 import { Answer } from '../answer'
 
 type Props = {
@@ -49,7 +49,7 @@ export const Question: FC<Props> = ({
 						answer={answer.answer}
 						disabled={!canUserAnswer}
 						handleAnswerClick={handleAnswerClick}
-						style={{ color: answer.color }}
+						color={answer.color as Color}
 					/>
 				))}
 			</div>
