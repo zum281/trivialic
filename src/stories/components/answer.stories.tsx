@@ -7,5 +7,9 @@ export default {
 }
 
 export const Story = () => (
-	<Answer answer="Vanessa Kensington" handleAnswerClick={() => {}} />
+	<Answer
+		color="black"
+		answer="Vanessa Kensington"
+		handleAnswerClick={() => {}}
+	/>
 )
